@@ -1,12 +1,7 @@
-/* ───────────────────────────────────────────────────
-   State
-   ─────────────────────────────────────────────────── */
+
 let currentTab = "login";
 let revealTimers = {}; // id → intervalId
 
-/* ───────────────────────────────────────────────────
-   Helpers
-   ─────────────────────────────────────────────────── */
 function getToken() {
   return localStorage.getItem("token");
 }
@@ -34,9 +29,6 @@ function expiryBadge(expiresAt) {
   return `<span class="badge good">✅ ${daysLeft}d left</span>`;
 }
 
-/* ───────────────────────────────────────────────────
-   Auth view control
-   ─────────────────────────────────────────────────── */
 function switchTab(tab) {
   currentTab = tab;
   document.getElementById("tabLogin").classList.toggle("active", tab === "login");
@@ -87,18 +79,14 @@ function logout() {
   document.getElementById("list").innerHTML = "";
 }
 
-/* ───────────────────────────────────────────────────
-   App view
-   ─────────────────────────────────────────────────── */
+
 function showAppView() {
   document.getElementById("authView").classList.add("hidden");
   document.getElementById("appView").classList.remove("hidden");
   load();
 }
 
-/* ───────────────────────────────────────────────────
-   Create key
-   ─────────────────────────────────────────────────── */
+
 async function create() {
   const titleInput = document.getElementById("title");
   const secretInput = document.getElementById("secret");
@@ -139,9 +127,7 @@ async function create() {
   }
 }
 
-/* ───────────────────────────────────────────────────
-   Delete key
-   ─────────────────────────────────────────────────── */
+
 async function remove(id) {
   if (!confirm("Delete this key? This cannot be undone.")) return;
   try {
@@ -155,9 +141,6 @@ async function remove(id) {
   }
 }
 
-/* ───────────────────────────────────────────────────
-   Rotate key
-   ─────────────────────────────────────────────────── */
 async function rotate(id) {
   try {
     const res = await fetch(`/api/${id}/rotate`, { method: "POST", headers: authHeaders() });
@@ -170,9 +153,7 @@ async function rotate(id) {
   }
 }
 
-/* ───────────────────────────────────────────────────
-   Reveal secret (10-second auto-clear)
-   ─────────────────────────────────────────────────── */
+
 async function reveal(id) {
   // Clear any existing reveal for this card
   if (revealTimers[id]) {
@@ -219,9 +200,6 @@ function escapeHtml(str) {
   return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
 
-/* ───────────────────────────────────────────────────
-   Load keys
-   ─────────────────────────────────────────────────── */
 async function load() {
   const container = document.getElementById("list");
 
@@ -269,9 +247,7 @@ async function load() {
   }
 }
 
-/* ───────────────────────────────────────────────────
-   Bootstrap
-   ─────────────────────────────────────────────────── */
+
 if (getToken()) {
   showAppView();
 }
