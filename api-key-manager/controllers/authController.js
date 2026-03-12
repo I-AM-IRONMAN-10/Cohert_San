@@ -54,7 +54,15 @@ exports.login = async (req, res) => {
     }
 
     const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: "8h" });
-    res.json({ token });
+    
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 8 * 60 * 60 * 1000 // 8 hours
+    });
+    
+    res.json({ message: "Login successful" });
   } catch (err) {
     console.error("login error:", err.message);
     res.status(500).json({ error: "Login failed" });
