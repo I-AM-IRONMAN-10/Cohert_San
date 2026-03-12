@@ -1,1 +1,1 @@
-san test clear
+san test 
