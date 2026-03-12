@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>The Bright Future — Layout Recreation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f6f6f6;
+      --card:#fffdfb;
+      --muted:#6b6b6b;
+      --accent:#e84e3c; /* read more */
+      --nav:#9aa3a9;
+      --panel-bg:#0d1120;
+      --panel-text:#e9eef6;
+      --accent-2:#ffece8;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;min-height:100vh;background:var(--bg);font-family:Montserrat,system-ui,Arial;color:#0b1220;display:flex;align-items:center;justify-content:center;padding:40px;
+    }
+    .wrap{
+      width:1024px;background:var(--card);border-radius:8px;padding:34px;box-shadow:0 18px 40px rgba(10,20,30,0.15);border:1px solid rgba(10,10,10,0.03);
+    }
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .logo{font-weight:800;font-size:28px;color:#0b1220;font-family:Lora, Georgia, serif}
+    nav{display:flex;gap:20px;color:var(--nav);font-size:14px}
+    .content{
+      display:grid;grid-template-columns:1.6fr 1fr;gap:28px;align-items:start;margin-top:8px
+    }
+    /* hero left */
+    .hero{
+      display:flex;flex-direction:column;gap:18px
+    }
+    .hero .hero-image{
+      width:100%;height:200px;background:#ddd;border-radius:4px;overflow:hidden
+    }
+    .hero .hero-image img{width:100%;height:100%;object-fit:cover;display:block}
+    .headline{
+      display:grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap:28px;
+      align-items:start
+    }
+    .headline h1{
+      font-size:40px;line-height:1.02;margin:0;font-weight:800;font-family:Lora, Georgia, serif
+    }
+    .headline p{color:var(--muted);margin:6px 0 0;font-size:14px}
+    .read-more{
+      margin-top:12px;display:inline-block;background:var(--accent);color:#fff;padding:10px 16px;border-radius:6px;font-weight:700;text-decoration:none;font-size:14px
+    }
+    /* right panel */
+    .panel{
+      background:linear-gradient(180deg,#081025 0%, #0f1530 100%);color:var(--panel-text);padding:22px;border-radius:6px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)
+    }
+    .panel h3{margin:0 0 8px;font-family:Montserrat;font-size:20px}
+    .panel .small{font-size:13px;color:#cbd6e6;margin-bottom:12px}
+    .panel .item{border-top:1px solid rgba(255,255,255,0.03);padding-top:12px;margin-top:12px}
+    .panel .item + .item{margin-top:10px}
+    .panel .item h4{margin:0;font-size:14px}
+    .panel .item p{margin:6px 0 0;font-size:12px;color:#9fb1d8}
+
+    /* features row */
+    .features{display:flex;gap:16px;margin-top:18px}
+    .feat{flex:1;background:transparent;display:flex;gap:10px;align-items:center}
+    .feat .thumb{width:72px;height:56px;border-radius:6px;overflow:hidden;flex-shrink:0}
+    .feat .thumb img{width:100%;height:100%;object-fit:cover}
+    .feat .meta{font-size:13px}
+    .feat .meta strong{display:block;color:#0b1220;font-weight:700}
+    .num{font-weight:800;color:#f06b57;font-size:22px;margin-right:10px}
+
+    /* small captions */
+    .caption{color:var(--muted);font-size:12px;margin-top:6px}
+
+    /* responsive */
+    @media(max-width:900px){.wrap{width:94%}.headline h1{font-size:28px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">W.</div>
+      <nav>
+        <div>Home</div>
+        <div>New</div>
+        <div>Popular</div>
+        <div>Trending</div>
+        <div>Categories</div>
+      </nav>
+    </header>
+
+    <div class="content">
+      <section class="hero">
+        <div class="hero-image">
+          <!-- reference image placed by maintainer -->
+          <img src="/home/shrenish/Desktop/Cohort/Cohort_Day2/assets/images/image-web-3-desktop.jpg" alt="hero reference">
+      </div>
+
+        <div class="headline">
+          <h1>The Bright<br>Future of<br>Web 3.0?</h1>
+          <div>
+            <p style="margin-top:6px;margin: bottom 12px;px;">We dive into the next evolution of the web that claims to put the power of the platforms back into the hands of the people. But is it really fulfilling its promise?</p>
+            <a class="read-more" href="#">READ MORE</a>
+          </div>
+        </div>
+
+        <div class="features">
+          <div class="feat">
+            <div class="num">01</div>
+            <div class="thumb"><img src="/home/shrenish/Desktop/Cohort/Cohort_Day2/assets/images/image-retro-pcs.jpg" alt="thumb"></div>
+            <div class="meta"><strong>Reviving Retro PCs</strong><div class="caption">What happens when old PCs are given modern upgrades?</div></div>
+          </div>
+
+          <div class="feat">
+            <div class="num">02</div>
+            <div class="thumb"><img src="/home/shrenish/Desktop/Cohort/Cohort_Day2/assets/images/image-top-laptops.jpg" alt="thumb"></div>
+            <div class="meta"><strong>Top 10 Laptops of 2022</strong><div class="caption">Our best picks for various needs and budgets.</div></div>
+          </div>
+
+          <div class="feat">
+            <div class="num">03</div>
+            <div class="thumb"><img src="/home/shrenish/Desktop/Cohort/Cohort_Day2/assets/images/image-gaming-growth.jpg" alt="thumb"></div>
+            <div class="meta"><strong>The Growth of Gaming</strong><div class="caption">How the pandemic has sparked fresh opportunities.</div></div>
+          </div>
+        </div>
+
+      </section>
+
+      <aside class="panel">
+        <h3>New</h3>
+        <div class="small">Hydrogen VS Electric Cars</div>
+        <div style="font-size:13px;margin-bottom:8px;color:#9fb1d8">Will hydrogen-fueled cars ever catch up to EVs?</div>
+
+        <div class="item">
+          <h4>The Downsides of AI Artistry</h4>
+          <p>What are the possible adverse effects of on-demand AI image generation?</p>
+        </div>
+
+        <div class="item">
+          <h4>Is VC Funding Drying Up?</h4>
+          <p>Private funding by VC firms is down 50% YOY. We take a look at what that means.</p>
+        </div>
+      </aside>
+
+    </div>
+
+  </div>
+</body>
+</html>
