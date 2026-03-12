@@ -1,1 +1,1 @@
-san testdrive
+san test clear
