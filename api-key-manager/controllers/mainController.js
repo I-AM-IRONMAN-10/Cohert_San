@@ -6,7 +6,7 @@ exports.create = (req, res) => {
     if (!title || !secret) {
       return res.status(400).json({ error: "title and secret are required" });
     }
-    const item = service.create(req.body);
+    const item = service.create(req.body, req.userId);
     res.status(201).json(item);
   } catch (err) {
     console.error("create error:", err.message);
@@ -16,7 +16,7 @@ exports.create = (req, res) => {
 
 exports.list = (req, res) => {
   try {
-    const data = service.list();
+    const data = service.list(req.userId);
     res.json(data);
   } catch (err) {
     console.error("list error:", err.message);
@@ -26,13 +26,33 @@ exports.list = (req, res) => {
 
 exports.remove = (req, res) => {
   try {
-    const removed = service.remove(req.params.id);
-    if (!removed) {
-      return res.status(404).json({ error: "Key not found" });
-    }
+    const removed = service.remove(req.params.id, req.userId);
+    if (!removed) return res.status(404).json({ error: "Key not found" });
     res.json({ message: "deleted" });
   } catch (err) {
     console.error("remove error:", err.message);
     res.status(500).json({ error: "Failed to delete key" });
+  }
+};
+
+exports.rotate = (req, res) => {
+  try {
+    const item = service.rotate(req.params.id, req.userId);
+    if (!item) return res.status(404).json({ error: "Key not found" });
+    res.json({ message: "Key rotated successfully", key: item });
+  } catch (err) {
+    console.error("rotate error:", err.message);
+    res.status(500).json({ error: "Failed to rotate key" });
+  }
+};
+
+exports.reveal = (req, res) => {
+  try {
+    const plaintext = service.reveal(req.params.id, req.userId);
+    if (plaintext === null) return res.status(404).json({ error: "Key not found" });
+    res.json({ secret: plaintext });
+  } catch (err) {
+    console.error("reveal error:", err.message);
+    res.status(500).json({ error: "Failed to reveal key" });
   }
 };

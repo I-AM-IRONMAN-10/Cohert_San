@@ -1,18 +1,17 @@
 const crypto = require("crypto");
+require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
 
-// AES-256-CBC requires a 32-byte key and 16-byte IV
-// In production, load KEY from environment variable (process.env.CRYPTO_KEY)
+// Derive a 32-byte key from env var (or fallback for local dev)
 const KEY = crypto
   .createHash("sha256")
-  .update("hardcodedkey")
-  .digest(); // 32-byte Buffer
+  .update(process.env.CRYPTO_KEY || "hardcodedkey")
+  .digest();
 
 exports.encrypt = function (text) {
   const iv = crypto.randomBytes(16);
   const cipher = crypto.createCipheriv("aes-256-cbc", KEY, iv);
   let encrypted = cipher.update(text, "utf8", "hex");
   encrypted += cipher.final("hex");
-  // Store iv:ciphertext so we can decrypt later
   return iv.toString("hex") + ":" + encrypted;
 };
 
