@@ -2,7 +2,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { readData, writeData } = require("../utils/fileStorage");
 const crypto = require("crypto");
-require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
 
 const USERS_FILE = "data/users.json";
 const JWT_SECRET = process.env.JWT_SECRET || "default-jwt-secret";

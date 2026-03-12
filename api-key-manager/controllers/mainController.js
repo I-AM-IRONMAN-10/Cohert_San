@@ -2,15 +2,12 @@ const service = require("../services/mainService");
 
 exports.create = (req, res) => {
   try {
-    const { title, secret } = req.body;
-    if (!title || !secret) {
-      return res.status(400).json({ error: "title and secret are required" });
-    }
     const item = service.create(req.body, req.userId);
     res.status(201).json(item);
   } catch (err) {
     console.error("create error:", err.message);
-    res.status(500).json({ error: "Failed to create key" });
+    // Pass service-level validation messages (e.g. empty secret) back as 400
+    res.status(400).json({ error: err.message || "Failed to create key" });
   }
 };
 
@@ -42,7 +39,8 @@ exports.rotate = (req, res) => {
     res.json({ message: "Key rotated successfully", key: item });
   } catch (err) {
     console.error("rotate error:", err.message);
-    res.status(500).json({ error: "Failed to rotate key" });
+    // Surface crypto errors (tampered data, key mismatch) as 422
+    res.status(422).json({ error: err.message || "Failed to rotate key" });
   }
 };
 
@@ -53,6 +51,8 @@ exports.reveal = (req, res) => {
     res.json({ secret: plaintext });
   } catch (err) {
     console.error("reveal error:", err.message);
-    res.status(500).json({ error: "Failed to reveal key" });
+    // Surface expiry and crypto errors directly to the frontend
+    const status = err.message.includes("expired") ? 403 : 422;
+    res.status(status).json({ error: err.message || "Failed to reveal key" });
   }
 };

@@ -145,7 +145,10 @@ async function rotate(id) {
   try {
     const res = await fetch(`/api/${id}/rotate`, { method: "POST", headers: authHeaders() });
     if (res.status === 401) { logout(); return; }
-    if (!res.ok) throw new Error(`Server error: ${res.status}`);
+    if (!res.ok) {
+      const d = await res.json().catch(() => ({}));
+      throw new Error(d.error || `Server error: ${res.status}`);
+    }
     showStatus("status", "Key rotated — re-encrypted with a new IV.");
     load();
   } catch (err) {
@@ -166,7 +169,10 @@ async function reveal(id) {
   try {
     const res = await fetch(`/api/${id}/reveal`, { headers: authHeaders() });
     if (res.status === 401) { logout(); return; }
-    if (!res.ok) throw new Error(`Server error: ${res.status}`);
+    if (!res.ok) {
+      const d = await res.json().catch(() => ({}));
+      throw new Error(d.error || `Server error: ${res.status}`);
+    }
     const { secret } = await res.json();
 
     const card = document.getElementById(`card-${id}`);
@@ -248,6 +254,4 @@ async function load() {
 }
 
 
-if (getToken()) {
-  showAppView();
-}
+// Always start on the login/signup page — no auto-login
