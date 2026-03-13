@@ -3,9 +3,42 @@
     "id": "d8ab76a3",
     "userId": "4473098866377fd0",
     "title": "Stripe API Key",
+<<<<<<< HEAD
     "secret": "b3a7133b91c35c6f0ce3542c14e79c10:10b0fa42a1b9b123d234afbb5a7a811c",
     "createdAt": "2026-03-12T06:04:44.873Z",
     "expiresAt": "2026-04-11T06:04:44.873Z",
+=======
+    "secret": "bf30007018d5f6db23f8d50e65dd9d46:d26649d60bf2296ab8653862b49fc0a8",
+    "createdAt": "2026-03-12T05:21:22.482Z",
+    "expiresAt": "2026-04-11T05:21:22.482Z",
+    "rotatedAt": "2026-03-12T05:21:27.417Z"
+  },
+  {
+    "id": "fd07ab9d",
+    "userId": "073bfdf873dbc9c2",
+    "title": "san api",
+    "secret": "5472901ffa345bb0305c4900674b6a11:c435bcd1ac3ccf9810af33a5d6035236847da5e962547b03d26de5b970dd14c1215a5e031cfe35120c447495c9c14f5b3e18b6e7371c8b26ebfe7e87a7bccf4643ec5e30440a99aaef168bfa3d673274",
+    "createdAt": "2026-03-12T08:34:55.424Z",
+    "expiresAt": "2026-04-11T08:34:55.424Z",
+    "rotatedAt": null
+  },
+  {
+    "id": "f173881c",
+    "userId": "471789ae6bee531a",
+    "title": "kissa",
+    "secret": "79acf2bb6cc350ebe71d070558b31d59:ce5e66ad5a199869e4446a186527874bbc04822907abe1125e50997d6fe61dd9a24528e597417dd3f228e526cba2e6ef7225cb8f14684573c6182578e141f04e60505dd87fa9638e9fa977371f4261d8d2ca7fbe1110d340f2398f2202ce0e0bd79d3447e39a394fed9c9dfffde3e6513ae717c402aeaf90710ab8b147594afdb93b7b3c49f9b85ef02d5bc21cf7630247239b746acbf93bd2b84b6d2d115e97",
+    "createdAt": "2026-03-12T08:41:46.358Z",
+    "expiresAt": "2026-04-11T08:41:46.358Z",
+    "rotatedAt": null
+  },
+  {
+    "id": "432badef",
+    "userId": "b7c0971f2f11f4cd",
+    "title": "title",
+    "secret": "86c32e03ecd231fddc8c26151d7df24e:7f021ed0a61eb1162373cd1eae563e99",
+    "createdAt": "2026-03-12T08:46:18.305Z",
+    "expiresAt": "2026-04-11T08:46:18.305Z",
+>>>>>>> 763825f (final commit)
     "rotatedAt": null
   }
 ]

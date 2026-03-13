@@ -1,5 +1,6 @@
 require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const path = require("path");
 const app = express();
 
@@ -7,6 +8,7 @@ const apiRoutes = require("../routes/main");
 const authRoutes = require("../routes/auth");
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "../frontend")));
 
 app.use("/auth", authRoutes);

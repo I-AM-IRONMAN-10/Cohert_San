@@ -2,14 +2,9 @@
 let currentTab = "login";
 let revealTimers = {}; // id → intervalId
 
-function getToken() {
-  return localStorage.getItem("token");
-}
-
 function authHeaders() {
   return {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + getToken(),
+    "Content-Type": "application/json"
   };
 }
 
@@ -61,7 +56,6 @@ async function submitAuth(e) {
       showStatus("authStatus", "Registered! Please log in.");
       switchTab("login");
     } else {
-      localStorage.setItem("token", data.token);
       showAppView();
     }
   } catch (err) {
@@ -72,8 +66,12 @@ async function submitAuth(e) {
   }
 }
 
-function logout() {
-  localStorage.removeItem("token");
+async function logout() {
+  try {
+    await fetch("/auth/logout", { method: "POST" });
+  } catch (err) {
+    console.error("Logout error", err);
+  }
   document.getElementById("appView").classList.add("hidden");
   document.getElementById("authView").classList.remove("hidden");
   document.getElementById("list").innerHTML = "";
@@ -106,6 +104,7 @@ async function create() {
     const res = await fetch("/api/create", {
       method: "POST",
       headers: authHeaders(),
+      credentials: "same-origin",
       body: JSON.stringify({ title, secret }),
     });
 
@@ -131,7 +130,11 @@ async function create() {
 async function remove(id) {
   if (!confirm("Delete this key? This cannot be undone.")) return;
   try {
-    const res = await fetch(`/api/${id}`, { method: "DELETE", headers: authHeaders() });
+    const res = await fetch(`/api/${id}`, { 
+      method: "DELETE", 
+      headers: authHeaders(),
+      credentials: "same-origin"
+    });
     if (res.status === 401) { logout(); return; }
     if (!res.ok) throw new Error(`Server error: ${res.status}`);
     showStatus("status", "Key deleted.");
@@ -143,7 +146,11 @@ async function remove(id) {
 
 async function rotate(id) {
   try {
-    const res = await fetch(`/api/${id}/rotate`, { method: "POST", headers: authHeaders() });
+    const res = await fetch(`/api/${id}/rotate`, { 
+      method: "POST", 
+      headers: authHeaders(),
+      credentials: "same-origin"
+    });
     if (res.status === 401) { logout(); return; }
     if (!res.ok) {
       const d = await res.json().catch(() => ({}));
@@ -167,7 +174,10 @@ async function reveal(id) {
   }
 
   try {
-    const res = await fetch(`/api/${id}/reveal`, { headers: authHeaders() });
+    const res = await fetch(`/api/${id}/reveal`, { 
+      headers: authHeaders(),
+      credentials: "same-origin"
+    });
     if (res.status === 401) { logout(); return; }
     if (!res.ok) {
       const d = await res.json().catch(() => ({}));
@@ -210,7 +220,10 @@ async function load() {
   const container = document.getElementById("list");
 
   try {
-    const res = await fetch("/api/list", { headers: authHeaders() });
+    const res = await fetch("/api/list", { 
+      headers: authHeaders(),
+      credentials: "same-origin"
+    });
 
     if (res.status === 401) { logout(); return; }
     if (!res.ok) throw new Error(`Server error: ${res.status}`);
@@ -254,4 +267,23 @@ async function load() {
 }
 
 
+<<<<<<< HEAD
 // Always start on the login/signup page — no auto-login
+=======
+// Check if user is logged in by making a test request
+async function checkAuthOnLoad() {
+  try {
+    const res = await fetch("/api/list", { 
+      headers: authHeaders(),
+      credentials: "same-origin"
+    });
+    if (res.ok) {
+      showAppView();
+    }
+  } catch (err) {
+    // Not logged in or error, stay on login view
+  }
+}
+
+checkAuthOnLoad();
+>>>>>>> 763825f (final commit)
